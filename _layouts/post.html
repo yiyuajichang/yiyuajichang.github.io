@@ -1,0 +1,196 @@
+---
+layout: default
+---
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="flex flex-col lg:flex-row gap-8">
+
+    <!-- Main Article -->
+    <article class="flex-1 min-w-0 bg-white rounded-2xl shadow-sm p-6 lg:p-8">
+
+      <!-- Breadcrumbs -->
+      {% include breadcrumbs.html %}
+
+      <!-- Header -->
+      <header class="mb-6">
+        {% if page.categories.size > 0 %}
+        <div class="mb-3">
+          {% for cat in page.categories %}
+          <a href="/categories/{{ cat | slugify }}/" class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full mr-2 hover:bg-red-200 transition">{{ cat }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <h1 class="text-2xl lg:text-3xl font-extrabold text-gray-900 leading-tight mb-4">{{ page.title | escape }}</h1>
+
+        <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500 pb-4 border-b border-gray-100">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+          </span>
+          {% if page.author %}
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            {{ page.author | escape }}
+          </span>
+          {% endif %}
+          {% assign words = content | number_of_words %}
+          <span>约 {{ words | divided_by: 300 | plus: 1 }} 分钟阅读</span>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-lg max-w-none
+        prose-headings:font-bold prose-headings:text-gray-900
+        prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-red-500 prose-h2:pl-3 prose-h2:mt-8
+        prose-h3:text-lg prose-h3:text-gray-800 prose-h3:mt-6
+        prose-p:text-gray-700 prose-p:leading-relaxed
+        prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+        prose-img:rounded-xl prose-img:shadow-md
+        prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+        prose-pre:bg-gray-900 prose-pre:rounded-xl
+        prose-blockquote:border-l-4 prose-blockquote:border-blue-400 prose-blockquote:bg-blue-50 prose-blockquote:py-1
+        prose-table:text-sm prose-th:bg-gray-50">
+        {{ content }}
+      </div>
+
+      <!-- Tags -->
+      {% if page.tags.size > 0 %}
+      <div class="mt-8 pt-6 border-t border-gray-100">
+        <div class="flex flex-wrap gap-2">
+          {% for tag in page.tags %}
+          <a href="/tags/{{ tag | slugify }}/" class="inline-block bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-700 text-sm px-3 py-1 rounded-full transition">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Social Share -->
+      <div class="mt-6 pt-6 border-t border-gray-100">
+        <p class="text-sm text-gray-500 mb-3">分享文章：</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url | url_encode }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-sm px-4 py-2 rounded-lg transition">Twitter</a>
+          <a href="https://t.me/share/url?url={{ page.url | absolute_url | url_encode }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded-lg transition">Telegram</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white text-sm px-4 py-2 rounded-lg transition">Facebook</a>
+          <button onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('链接已复制！'))" class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm px-4 py-2 rounded-lg transition">复制链接</button>
+        </div>
+      </div>
+
+      <!-- Prev / Next Navigation -->
+      <nav class="mt-8 pt-6 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="group flex flex-col p-4 bg-gray-50 hover:bg-blue-50 rounded-xl border border-gray-200 hover:border-blue-300 transition">
+          <span class="text-xs text-gray-400 mb-1">← 上一篇</span>
+          <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 line-clamp-2 transition">{{ page.previous.title | escape }}</span>
+        </a>
+        {% else %}
+        <div></div>
+        {% endif %}
+
+        {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="group flex flex-col p-4 bg-gray-50 hover:bg-blue-50 rounded-xl border border-gray-200 hover:border-blue-300 transition text-right">
+          <span class="text-xs text-gray-400 mb-1">下一篇 →</span>
+          <span class="text-sm font-semibold text-gray-800 group-hover:text-blue-700 line-clamp-2 transition">{{ page.next.title | escape }}</span>
+        </a>
+        {% endif %}
+      </nav>
+
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-72 flex-shrink-0 space-y-6">
+
+      <!-- TOC -->
+      <div id="toc-container" class="hidden lg:block bg-white rounded-2xl shadow-sm p-5 sticky top-4">
+        <h3 class="text-base font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">📋 文章目录</h3>
+        <ul id="toc-list-sidebar" class="space-y-2 text-sm max-h-[80vh] overflow-y-auto"></ul>
+      </div>
+
+      <!-- Latest Posts -->
+      <div class="bg-white rounded-2xl shadow-sm p-5 sticky top-4">
+        <h3 class="text-base font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">最新文章</h3>
+        <ul class="space-y-3">
+          {% for post in site.posts limit: 8 %}
+          {% unless post.url == page.url %}
+          <li>
+            <a href="{{ post.url | relative_url }}" class="group block">
+              <p class="text-sm font-medium text-gray-800 group-hover:text-blue-600 leading-snug line-clamp-2 transition">{{ post.title | escape }}</p>
+              <p class="text-xs text-gray-400 mt-0.5">{{ post.date | date: "%Y-%m-%d" }}</p>
+            </a>
+          </li>
+          {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Related Posts by Tags -->
+      {% if page.tags.size > 0 %}
+      <div class="bg-white rounded-2xl shadow-sm p-5">
+        <h3 class="text-base font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">相关文章</h3>
+        <ul class="space-y-3">
+          {% assign current_tags = page.tags %}
+          {% assign related_count = 0 %}
+          {% for post in site.posts %}
+            {% unless post.url == page.url %}
+              {% for tag in current_tags %}
+                {% if post.tags contains tag and related_count < 5 %}
+                  <li>
+                    <a href="{{ post.url | relative_url }}" class="group block">
+                      <p class="text-sm font-medium text-gray-800 group-hover:text-blue-600 leading-snug line-clamp-2 transition">{{ post.title | escape }}</p>
+                      <p class="text-xs text-gray-400 mt-0.5">{{ post.date | date: "%Y-%m-%d" }}</p>
+                    </a>
+                  </li>
+                  {% assign related_count = related_count | plus: 1 %}
+                {% endif %}
+              {% endfor %}
+            {% endunless %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+    </aside>
+  </div>
+</div>
+
+<!-- Auto TOC via JS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var headings = Array.from(document.querySelectorAll('.prose h2, .prose h3'));
+  var tocContainer = document.getElementById('toc-container');
+  var tocList = document.getElementById('toc-list-sidebar');
+
+  if (headings.length < 2 || !tocContainer || !tocList) {
+    if(tocContainer) tocContainer.style.display = 'none';
+    return;
+  }
+
+  tocContainer.classList.remove('hidden');
+
+  headings.forEach(function(h, i) {
+    if (!h.id) h.id = 'heading-' + i;
+    var li = document.createElement('li');
+    li.className = h.tagName === 'H3' ? 'ml-4' : '';
+    var link = document.createElement('a');
+    link.href = '#' + h.id;
+    link.textContent = h.textContent;
+    link.className = 'text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200';
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+
+  // Bonus: Active link highlighting on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var id = entry.target.getAttribute('id');
+      var tocLink = tocList.querySelector('a[href="#' + id + '"]');
+      if (entry.isIntersecting) {
+        tocList.querySelectorAll('a').forEach(a => a.classList.remove('text-blue-600', 'font-semibold'));
+        tocLink.classList.add('text-blue-600', 'font-semibold');
+      }
+    });
+  }, { rootMargin: '-20% 0px -80% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+});
+</script>
