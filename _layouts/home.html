@@ -1,0 +1,136 @@
+---
+layout: default
+---
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>{{ page.title }}</h1>
+        <p class="hero-subtitle">{{ page.subtitle }}</p>
+        <div class="hero-buttons">
+            <a href="/categories" class="btn btn-primary">浏览所有机场</a>
+            <a href="#features" class="btn btn-secondary">了解更多</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats" id="features">
+    <div class="container">
+        <div class="stats-grid">
+            {% for stat in page.stats %}
+            <div class="stat-item">
+                <div class="stat-value">{{ stat.value }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <h2>为什么选择一元机场？</h2>
+        <div class="features-grid">
+            {% for feature in page.features %}
+            <div class="feature-card">
+                <div class="feature-icon">{{ feature.icon }}</div>
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="specs">
+    <div class="container">
+        <h2>技术规格</h2>
+        <div class="specs-grid">
+            <div class="spec-item">
+                <h4>支持协议</h4>
+                <ul>
+                    {% for protocol in page.specs.protocols %}
+                    <li>{{ protocol }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="spec-item">
+                <h4>解锁服务</h4>
+                <ul>
+                    {% for service in page.specs.unlockServices %}
+                    <li>{{ service }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="spec-item">
+                <h4>IP 类型</h4>
+                <p>{{ page.specs.ipType }}</p>
+            </div>
+            <div class="spec-item">
+                <h4>节点分布</h4>
+                <p>{{ page.specs.nodeDistribution }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing">
+    <div class="container">
+        <h2>价格方案</h2>
+        <div class="pricing-grid">
+            {% for plan in page.pricing %}
+            <div class="pricing-card {% if plan.recommended %}recommended{% endif %}">
+                {% if plan.recommended %}<div class="badge">推荐</div>{% endif %}
+                <h3>{{ plan.name }}</h3>
+                <div class="price">
+                    <span class="amount">¥{{ plan.price }}</span>
+                    <span class="period">/{{ plan.period }}</span>
+                </div>
+                <div class="features">
+                    <p><strong>流量：</strong>{{ plan.traffic }}</p>
+                    <p><strong>设备数：</strong>{{ plan.devices }}</p>
+                    <ul>
+                        {% for feature in plan.features %}
+                        <li>✓ {{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a href="#" class="btn btn-primary">立即购买</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="comparison">
+    <div class="container">
+        <h2>与其他机场对比</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>机场</th>
+                        <th>平均速度</th>
+                        <th>节点数</th>
+                        <th>延迟</th>
+                        <th>价格</th>
+                        <th>推荐度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for airport in site.data.airports %}
+                    <tr>
+                        <td><strong>{{ airport.name }}</strong></td>
+                        <td>{{ airport.specs.avgSpeed }}</td>
+                        <td>{{ airport.specs.nodeCount }}+</td>
+                        <td>{{ airport.specs.latency }}</td>
+                        <td>¥{{ airport.plans[1].price }}/月</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{{ content }}

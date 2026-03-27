@@ -1,0 +1,80 @@
+---
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.description }}</p>
+    </div>
+</section>
+
+<section class="categories">
+    <div class="container">
+        <div class="airports-grid">
+            {% for airport in site.data.airports %}
+            <div class="airport-card">
+                <div class="airport-header">
+                    <span class="emoji">{{ airport.emoji }}</span>
+                    <h3>{{ airport.name }}</h3>
+                </div>
+                <p class="description">{{ airport.description }}</p>
+                <div class="specs-summary">
+                    <div class="spec">
+                        <span class="label">速度</span>
+                        <span class="value">{{ airport.specs.avgSpeed }}</span>
+                    </div>
+                    <div class="spec">
+                        <span class="label">节点</span>
+                        <span class="value">{{ airport.specs.nodeCount }}+</span>
+                    </div>
+                    <div class="spec">
+                        <span class="label">延迟</span>
+                        <span class="value">{{ airport.specs.latency }}</span>
+                    </div>
+                </div>
+                <div class="price-range">
+                    <span>¥{{ airport.plans[0].price }} - ¥{{ airport.plans | last | map: "price" | join: "" }}</span>
+                </div>
+                <a href="/airports/{{ airport.id }}" class="btn btn-primary">了解详情</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="comparison-full">
+    <div class="container">
+        <h2>完整对比表</h2>
+        <div class="table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>机场</th>
+                        <th>平均速度</th>
+                        <th>节点数</th>
+                        <th>延迟</th>
+                        <th>支持协议</th>
+                        <th>最低价格</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for airport in site.data.airports %}
+                    <tr>
+                        <td><strong>{{ airport.emoji }} {{ airport.name }}</strong></td>
+                        <td>{{ airport.specs.avgSpeed }}</td>
+                        <td>{{ airport.specs.nodeCount }}+</td>
+                        <td>{{ airport.specs.latency }}</td>
+                        <td>{{ airport.specs.protocols | join: ", " }}</td>
+                        <td>¥{{ airport.plans[0].price }}/月</td>
+                        <td><a href="/airports/{{ airport.id }}">查看</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{{ content }}

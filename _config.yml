@@ -1,0 +1,66 @@
+# Jekyll 配置文件
+title: 一元机场官方导航
+description: 性价比之王，全球加速，安全可靠 - 一元机场官方导航站
+author: 一元机场
+email: support@yiyuanjichang.com
+url: https://yiyuajichang.github.io
+baseurl: ""
+
+# 构建设置
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+# 分页设置
+paginate: 10
+paginate_path: "/page:num/"
+
+# 输出设置
+permalink: /:categories/:year/:month/:day/:title/
+timezone: Asia/Shanghai
+
+# 排除文件
+exclude:
+  - .gitignore
+  - .DS_Store
+  - node_modules
+  - Gemfile
+  - Gemfile.lock
+
+# 包含文件
+include:
+  - .htaccess
+
+# 集合设置
+collections:
+  airports:
+    output: true
+    permalink: /airports/:name/
+
+# 默认值
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "airports"
+    values:
+      layout: "airport"
+
+# SEO 设置
+social:
+  name: 一元机场
+  links:
+    - https://twitter.com/yiyuanjichang
+    - https://github.com/yiyuajichang

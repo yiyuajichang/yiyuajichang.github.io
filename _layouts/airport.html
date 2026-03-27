@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+<section class="airport-detail">
+    <div class="container">
+        <div class="airport-header-detail">
+            <h1>{{ page.title }}</h1>
+            <p class="subtitle">{{ page.description }}</p>
+        </div>
+
+        <div class="airport-content">
+            <div class="airport-main">
+                <section class="specs-detail">
+                    <h2>技术规格</h2>
+                    <div class="specs-grid">
+                        <div class="spec-box">
+                            <h4>平均速度</h4>
+                            <p class="value">{{ page.specs.avgSpeed }}</p>
+                        </div>
+                        <div class="spec-box">
+                            <h4>全球节点</h4>
+                            <p class="value">{{ page.specs.nodeCount }}+</p>
+                        </div>
+                        <div class="spec-box">
+                            <h4>平均延迟</h4>
+                            <p class="value">{{ page.specs.latency }}</p>
+                        </div>
+                        <div class="spec-box">
+                            <h4>IP 类型</h4>
+                            <p class="value">{{ page.specs.ipType }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="protocols">
+                    <h2>支持协议</h2>
+                    <div class="protocol-list">
+                        {% for protocol in page.specs.protocols %}
+                        <span class="protocol-tag">{{ protocol }}</span>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section class="unlock-services">
+                    <h2>解锁服务</h2>
+                    <div class="services-grid">
+                        {% for service in page.specs.unlockServices %}
+                        <div class="service-item">✓ {{ service }}</div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                {{ content }}
+            </div>
+
+            <aside class="airport-sidebar">
+                <section class="pricing-sidebar">
+                    <h2>价格方案</h2>
+                    {% for plan in page.plans %}
+                    <div class="plan-card {% if plan.recommended %}recommended{% endif %}">
+                        {% if plan.recommended %}<span class="badge">推荐</span>{% endif %}
+                        <h3>{{ plan.name }}</h3>
+                        <div class="price">¥{{ plan.price }}/{{ plan.period }}</div>
+                        <ul class="plan-features">
+                            <li><strong>流量：</strong> {{ plan.traffic }}</li>
+                            <li><strong>设备：</strong> {{ plan.devices }} 台</li>
+                            {% for feature in plan.features %}
+                            <li>✓ {{ feature }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#" class="btn btn-primary">立即购买</a>
+                    </div>
+                    {% endfor %}
+                </section>
+
+                <section class="features-sidebar">
+                    <h2>主要特性</h2>
+                    <ul>
+                        {% for feature in page.features %}
+                        <li>✓ {{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </aside>
+        </div>
+    </div>
+</section>
