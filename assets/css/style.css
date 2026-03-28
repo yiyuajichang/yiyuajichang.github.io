@@ -107,6 +107,20 @@ tbody tr:hover { background: var(--bg-light); }
 .spec .value { display: block; font-size: 16px; font-weight: 700; color: var(--primary-color); }
 .price-range { margin-bottom: 16px; font-size: 14px; color: var(--text-light); }
 
+.about { padding: 80px 20px; background: #f9fafb; }
+.about h2 { font-size: 36px; text-align: center; margin-bottom: 32px; }
+.about h3 { font-size: 20px; margin-top: 32px; margin-bottom: 16px; color: var(--text-dark); }
+.about p { color: var(--text-light); line-height: 1.8; margin-bottom: 16px; }
+.about ul { list-style: none; padding: 0; }
+.about li { padding: 12px 0; border-bottom: 1px solid var(--border-color); color: var(--text-light); }
+.about li strong { color: var(--text-dark); }
+
+.performance { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 80px 20px; }
+.performance h2 { font-size: 36px; text-align: center; margin-bottom: 48px; }
+
+.ip-distribution { padding: 80px 20px; background: #ffffff; }
+.ip-distribution h2 { font-size: 36px; text-align: center; margin-bottom: 48px; }
+
 .footer { background: #1f2937; color: #d1d5db; padding: 60px 20px 20px; }
 .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px; }
 .footer-section h3, .footer-section h4 { color: white; margin-bottom: 16px; }

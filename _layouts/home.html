@@ -43,10 +43,10 @@ layout: default
 
 <section class="specs">
     <div class="container">
-        <h2>技术规格</h2>
+        <h2>支持的协议与服务</h2>
         <div class="specs-grid">
             <div class="spec-item">
-                <h4>支持协议</h4>
+                <h4>🔐 支持协议</h4>
                 <ul>
                     {% for protocol in page.specs.protocols %}
                     <li>{{ protocol }}</li>
@@ -54,7 +54,7 @@ layout: default
                 </ul>
             </div>
             <div class="spec-item">
-                <h4>解锁服务</h4>
+                <h4>🎬 解锁服务</h4>
                 <ul>
                     {% for service in page.specs.unlockServices %}
                     <li>{{ service }}</li>
@@ -62,20 +62,93 @@ layout: default
                 </ul>
             </div>
             <div class="spec-item">
-                <h4>IP 类型</h4>
-                <p>{{ page.specs.ipType }}</p>
+                <h4>🌐 IP 类型</h4>
+                <p><strong>{{ page.specs.ipType }}</strong></p>
+                <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">住宅 IP 隐蔽性强，数据中心 IP 速度快</p>
             </div>
             <div class="spec-item">
-                <h4>节点分布</h4>
-                <p>{{ page.specs.nodeDistribution }}</p>
+                <h4>🗺️ 节点分布</h4>
+                <p><strong>{{ page.specs.nodeDistribution }}</strong></p>
+                <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">全球 280+ 节点，智能路由选择</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="performance" style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 80px 20px;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 48px;">性能指标</h2>
+        <div class="specs-grid">
+            {% for perf in page.specs.performance %}
+            <div class="spec-item">
+                <h4>{{ perf.metric }}</h4>
+                <p style="font-size: 28px; font-weight: 700; color: #1e40af; margin: 12px 0;">{{ perf.value }}</p>
+                <p style="font-size: 13px; color: #6b7280;">{{ perf.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="ip-distribution" style="padding: 80px 20px; background: #ffffff;">
+    <div class="container">
+        <h2 style="text-align: center; margin-bottom: 48px;">全球节点分布</h2>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead style="background: #f3f4f6;">
+                    <tr>
+                        <th style="padding: 16px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb;">地区</th>
+                        <th style="padding: 16px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb;">节点数</th>
+                        <th style="padding: 16px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb;">特点</th>
+                        <th style="padding: 16px; text-align: left; font-weight: 700; border-bottom: 2px solid #e5e7eb;">平均速度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 16px;">🇺🇸 美国</td>
+                        <td style="padding: 16px;">85+</td>
+                        <td style="padding: 16px;">节点最多，速度最快</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">920 Mbps</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 16px;">🇯🇵 日本</td>
+                        <td style="padding: 16px;">45+</td>
+                        <td style="padding: 16px;">亚洲最优选择</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">850 Mbps</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 16px;">🇸🇬 新加坡</td>
+                        <td style="padding: 16px;">35+</td>
+                        <td style="padding: 16px;">东南亚枢纽</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">880 Mbps</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 16px;">🇭🇰 香港</td>
+                        <td style="padding: 16px;">40+</td>
+                        <td style="padding: 16px;">中国用户首选</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">890 Mbps</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 16px;">🇪🇺 欧洲</td>
+                        <td style="padding: 16px;">50+</td>
+                        <td style="padding: 16px;">欧洲覆盖最全</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">800 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px;">🌍 其他地区</td>
+                        <td style="padding: 16px;">25+</td>
+                        <td style="padding: 16px;">南美、大洋洲等</td>
+                        <td style="padding: 16px; color: #1e40af; font-weight: 700;">750 Mbps</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </section>
 
 <section class="pricing">
     <div class="container">
-        <h2>价格方案</h2>
+        <h2>一元机场价格方案</h2>
         <div class="pricing-grid">
             {% for plan in page.pricing %}
             <div class="pricing-card {% if plan.recommended %}recommended{% endif %}">
@@ -94,7 +167,7 @@ layout: default
                         {% endfor %}
                     </ul>
                 </div>
-                <a href="#" class="btn btn-primary">立即购买</a>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">立即购买</a>
             </div>
             {% endfor %}
         </div>
@@ -117,19 +190,40 @@ layout: default
                     </tr>
                 </thead>
                 <tbody>
-                    {% for airport in site.data.airports %}
+                    {% for airport in page.comparison %}
                     <tr>
-                        <td><strong>{{ airport.name }}</strong></td>
-                        <td>{{ airport.specs.avgSpeed }}</td>
-                        <td>{{ airport.specs.nodeCount }}+</td>
-                        <td>{{ airport.specs.latency }}</td>
-                        <td>¥{{ airport.plans[1].price }}/月</td>
-                        <td>⭐⭐⭐⭐⭐</td>
+                        <td><strong>{{ airport.airport }}</strong></td>
+                        <td>{{ airport.speed }}</td>
+                        <td>{{ airport.nodes }}</td>
+                        <td>{{ airport.latency }}</td>
+                        <td>{{ airport.price }}</td>
+                        <td>{{ airport.rating }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+    </div>
+</section>
+
+<section class="about" style="padding: 80px 20px; background: #f9fafb;">
+    <div class="container" style="max-width: 800px;">
+        <h2 style="text-align: center; margin-bottom: 32px;">关于一元机场</h2>
+        
+        <h3 style="margin-top: 32px; margin-bottom: 16px;">我们的使命</h3>
+        <p>一元机场是性价比最高的代理服务提供商，致力于为全球用户提供安全、快速、稳定的网络访问体验。我们相信每个人都应该有安全、快速、稳定的网络访问权利，而不需要花费巨资。</p>
+        
+        <h3 style="margin-top: 32px; margin-bottom: 16px;">技术架构</h3>
+        <p>一元机场采用全球分布式服务器架构，在美国、日本、新加坡、香港、欧洲等地部署了 280+ 个高性能节点。我们使用最新的加密技术和智能路由算法，确保您的数据安全和连接速度。</p>
+        
+        <h3 style="margin-top: 32px; margin-bottom: 16px;">我们的承诺</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;"><strong>✓ 无日志政策</strong> - 我们不记录任何用户活动，完全尊重您的隐私</li>
+            <li style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;"><strong>✓ 无隐藏费用</strong> - 价格透明，没有任何额外收费或续费陷阱</li>
+            <li style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;"><strong>✓ 无限制速度</strong> - 所有套餐都享受最快的连接速度，无限制</li>
+            <li style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;"><strong>✓ 无地域限制</strong> - 访问全球任何网站，没有任何地理限制</li>
+            <li style="padding: 12px 0;"><strong>✓ 30 天退款保证</strong> - 不满意可全额退款，无任何问题</li>
+        </ul>
     </div>
 </section>
 
