@@ -2,37 +2,107 @@
 layout: default
 ---
 
-<section class="page-header">
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.date | date: "%Y 年 %m 月 %d 日" }} | 作者：{{ page.author }}</p>
+<!-- 面包屑导航 -->
+<div class="breadcrumb" style="padding: 16px 0; background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+    <div class="container" style="font-size: 14px; color: #6b7280;">
+        <a href="/" style="color: #1e40af; text-decoration: none;">首页</a>
+        <span style="margin: 0 8px;">/</span>
+        <a href="/news" style="color: #1e40af; text-decoration: none;">新闻</a>
+        <span style="margin: 0 8px;">/</span>
+        <span>{{ page.title | truncate: 40 }}</span>
+    </div>
+</div>
+
+<section class="post-header" style="padding: 40px 20px; background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); color: white;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <span style="font-size: 13px; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; display: inline-block;">{{ page.category }}</span>
+        </div>
+        <h1 style="margin: 0; font-size: 32px; line-height: 1.4;">{{ page.title }}</h1>
+        <div style="margin-top: 16px; display: flex; gap: 24px; font-size: 14px; opacity: 0.9;">
+            <span>📅 {{ page.date | date: "%Y 年 %m 月 %d 日" }}</span>
+            <span>✍️ {{ page.author }}</span>
+        </div>
+    </div>
 </section>
 
-<section class="post-content">
-    <div class="container" style="max-width: 800px;">
-        <article>
-            {{ content }}
-        </article>
-        
-        <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
-            <h3>分享这篇文章</h3>
-            <div style="display: flex; gap: 16px; margin-top: 16px;">
-                <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center;">分享到微博</a>
-                <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center;">分享到微信</a>
-                <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center;">复制链接</a>
+<section class="post-content" style="padding: 60px 20px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 40px;">
+            <!-- 主要内容 -->
+            <div>
+                <article style="line-height: 1.8; color: #374151;">
+                    {{ content }}
+                </article>
+                
+                <!-- 分享按钮 -->
+                <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+                    <h3 style="margin-top: 0;">分享这篇文章</h3>
+                    <div style="display: flex; gap: 16px; margin-top: 16px;">
+                        <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center; font-size: 14px;">分享到微博</a>
+                        <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center; font-size: 14px;">分享到微信</a>
+                        <a href="#" class="btn btn-secondary" style="flex: 1; text-align: center; font-size: 14px;">复制链接</a>
+                    </div>
+                </div>
+                
+                <!-- 返回按钮 -->
+                <div style="margin-top: 48px; text-align: center;">
+                    <a href="/news" class="btn btn-primary">← 返回新闻列表</a>
+                </div>
             </div>
-        </div>
-        
-        <div style="margin-top: 48px; text-align: center;">
-            <a href="/news" class="btn btn-primary">返回新闻列表</a>
+            
+            <!-- 右侧栏 -->
+            <aside style="padding-top: 20px;">
+                <!-- 最新文章 -->
+                <div style="background: #f9fafb; padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+                    <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 16px;">📰 最新文章</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        {% assign posts = site.posts | sort: 'date' | reverse %}
+                        {% for post in posts limit: 5 %}
+                        <li style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e5e7eb;">
+                            <a href="{{ post.url }}" style="color: #1e40af; text-decoration: none; font-size: 13px; line-height: 1.4;">
+                                {% if post.title.size > 30 %}
+                                    {{ post.title | truncate: 30 }}
+                                {% else %}
+                                    {{ post.title }}
+                                {% endif %}
+                            </a>
+                            <div style="font-size: 12px; color: #9ca3af; margin-top: 4px;">{{ post.date | date: '%m月%d日' }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <!-- 随机文章 -->
+                <div style="background: #f0f9ff; padding: 24px; border-radius: 8px; border-left: 4px solid #1e40af;">
+                    <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 16px;">🎲 随机推荐</h3>
+                    {% assign random_post = site.posts | sample %}
+                    <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 12px;">
+                        <span style="font-size: 12px; color: #f97316; background: #fed7aa; padding: 2px 6px; border-radius: 3px;">{{ random_post.category }}</span>
+                        <h4 style="margin: 8px 0; font-size: 14px;">
+                            <a href="{{ random_post.url }}" style="color: #1f2937; text-decoration: none;">{{ random_post.title | truncate: 35 }}</a>
+                        </h4>
+                        <p style="margin: 8px 0; font-size: 12px; color: #6b7280; line-height: 1.5;">{{ random_post.excerpt | strip_html | truncate: 60 }}</p>
+                        <a href="{{ random_post.url }}" style="color: #1e40af; text-decoration: none; font-size: 12px; font-weight: 500;">阅读 →</a>
+                    </div>
+                </div>
+                
+                <!-- 文章分类 -->
+                <div style="background: #f9fafb; padding: 24px; border-radius: 8px; margin-top: 24px;">
+                    <h3 style="margin-top: 0; margin-bottom: 16px; font-size: 16px;">📂 分类</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        {% assign categories = site.posts | map: 'category' | uniq | sort %}
+                        {% for category in categories %}
+                        <a href="/news" style="display: inline-block; background: white; color: #1e40af; padding: 6px 12px; border-radius: 20px; border: 1px solid #e5e7eb; text-decoration: none; font-size: 12px; transition: all 0.3s ease;">{{ category }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
 
 <style>
-.post-content {
-    padding: 60px 20px;
-}
-
 .post-content article {
     line-height: 1.8;
     color: #374151;
@@ -43,6 +113,8 @@ layout: default
     margin-top: 32px;
     margin-bottom: 16px;
     color: #1f2937;
+    border-bottom: 2px solid #1e40af;
+    padding-bottom: 12px;
 }
 
 .post-content h3 {
@@ -50,6 +122,13 @@ layout: default
     margin-top: 24px;
     margin-bottom: 12px;
     color: #1f2937;
+}
+
+.post-content h4 {
+    font-size: 18px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #374151;
 }
 
 .post-content p {
@@ -72,6 +151,9 @@ layout: default
     margin-bottom: 16px;
     color: #6b7280;
     font-style: italic;
+    background: #f0f9ff;
+    padding: 12px 16px;
+    border-radius: 4px;
 }
 
 .post-content code {
@@ -79,6 +161,7 @@ layout: default
     padding: 2px 6px;
     border-radius: 4px;
     font-family: 'Courier New', monospace;
+    color: #d946ef;
 }
 
 .post-content pre {
@@ -88,11 +171,46 @@ layout: default
     border-radius: 8px;
     overflow-x: auto;
     margin-bottom: 16px;
+    border-left: 4px solid #1e40af;
 }
 
 .post-content pre code {
     background: none;
     padding: 0;
     color: inherit;
+}
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.post-content table th {
+    background: #f3f4f6;
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.post-content table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.post-content table tr:hover {
+    background: #f9fafb;
+}
+
+@media (max-width: 768px) {
+    .post-content > div {
+        grid-template-columns: 1fr !important;
+    }
+    
+    aside {
+        display: none;
+    }
 }
 </style>

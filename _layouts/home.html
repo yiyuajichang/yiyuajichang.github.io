@@ -2,6 +2,13 @@
 layout: default
 ---
 
+<!-- 面包屑导航 -->
+<div class="breadcrumb" style="padding: 16px 0; background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+    <div class="container" style="font-size: 14px; color: #6b7280;">
+        <a href="/" style="color: #1e40af; text-decoration: none;">首页</a>
+    </div>
+</div>
+
 <section class="hero">
     <div class="hero-content">
         <h1>{{ page.title }}</h1>
@@ -206,6 +213,38 @@ layout: default
     </div>
 </section>
 
+<!-- 最新新闻展示 -->
+<section class="latest-news" style="padding: 80px 20px; background: #ffffff;">
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px;">
+            <h2 style="margin: 0;">最新资讯</h2>
+            <a href="/news" style="color: #1e40af; text-decoration: none; font-size: 14px;">查看全部 →</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            {% assign posts = site.posts | sort: 'date' | reverse %}
+            {% for post in posts limit: 3 %}
+            <div class="news-card" style="padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                    <span style="font-size: 12px; color: #f97316; background: #fed7aa; padding: 4px 8px; border-radius: 4px;">{{ post.category }}</span>
+                    <span style="font-size: 12px; color: #6b7280;">{{ post.date | date: '%Y年%m月%d日' }}</span>
+                </div>
+                <h3 style="margin: 12px 0; font-size: 16px; line-height: 1.5;">
+                    <a href="{{ post.url }}" style="color: #1f2937; text-decoration: none;">
+                        {% if post.title.size > 40 %}
+                            {{ post.title | truncate: 40 }}
+                        {% else %}
+                            {{ post.title }}
+                        {% endif %}
+                    </a>
+                </h3>
+                <p style="margin: 12px 0; font-size: 14px; color: #6b7280; line-height: 1.6;">{{ post.excerpt | strip_html | truncate: 80 }}</p>
+                <a href="{{ post.url }}" style="color: #1e40af; text-decoration: none; font-size: 14px; font-weight: 500;">阅读全文 →</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <section class="about" style="padding: 80px 20px; background: #f9fafb;">
     <div class="container" style="max-width: 800px;">
         <h2 style="text-align: center; margin-bottom: 32px;">关于一元机场</h2>
@@ -226,3 +265,14 @@ layout: default
         </ul>
     </div>
 </section>
+
+<style>
+    .news-card {
+        cursor: pointer;
+    }
+    .news-card:hover {
+        border-color: #1e40af !important;
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+        transform: translateY(-2px);
+    }
+</style>
