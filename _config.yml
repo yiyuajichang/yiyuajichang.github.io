@@ -8,6 +8,10 @@ baseurl: ""
 
 # 构建设置
 markdown: kramdown
+
+# 主题设置 - 禁用默认主题，使用自定义布局
+theme: null
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
