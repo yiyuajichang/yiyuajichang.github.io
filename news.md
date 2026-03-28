@@ -60,7 +60,13 @@ permalink: /news
                     </div>
                 </div>
                 
+                {% if post.excerpt %}
                 <p style="color: #374151; line-height: 1.8; margin: 16px 0; font-size: 15px;">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+                {% elsif post.description %}
+                <p style="color: #374151; line-height: 1.8; margin: 16px 0; font-size: 15px;">{{ post.description | strip_html | truncate: 150 }}</p>
+                {% else %}
+                <p style="color: #374151; line-height: 1.8; margin: 16px 0; font-size: 15px;">{{ post.content | strip_html | truncate: 150 }}</p>
+                {% endif %}
                 
                 <a href="{{ post.url }}" style="display: inline-block; color: #1e40af; text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 0; border-bottom: 2px solid transparent; transition: all 0.3s;">
                     阅读全文 →

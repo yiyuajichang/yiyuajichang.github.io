@@ -225,7 +225,11 @@ layout: default
             {% for post in posts limit: 3 %}
             <div class="news-card" style="padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px; transition: all 0.3s ease;">
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                    {% if post.category %}
                     <span style="font-size: 12px; color: #f97316; background: #fed7aa; padding: 4px 8px; border-radius: 4px;">{{ post.category }}</span>
+                    {% else %}
+                    <span style="font-size: 12px; color: #f97316; background: #fed7aa; padding: 4px 8px; border-radius: 4px;">文章</span>
+                    {% endif %}
                     <span style="font-size: 12px; color: #6b7280;">{{ post.date | date: '%Y年%m月%d日' }}</span>
                 </div>
                 <h3 style="margin: 12px 0; font-size: 16px; line-height: 1.5;">
@@ -237,7 +241,13 @@ layout: default
                         {% endif %}
                     </a>
                 </h3>
+                {% if post.excerpt %}
                 <p style="margin: 12px 0; font-size: 14px; color: #6b7280; line-height: 1.6;">{{ post.excerpt | strip_html | truncate: 80 }}</p>
+                {% elsif post.description %}
+                <p style="margin: 12px 0; font-size: 14px; color: #6b7280; line-height: 1.6;">{{ post.description | strip_html | truncate: 80 }}</p>
+                {% else %}
+                <p style="margin: 12px 0; font-size: 14px; color: #6b7280; line-height: 1.6;">{{ post.content | strip_html | truncate: 80 }}</p>
+                {% endif %}
                 <a href="{{ post.url }}" style="color: #1e40af; text-decoration: none; font-size: 14px; font-weight: 500;">阅读全文 →</a>
             </div>
             {% endfor %}
