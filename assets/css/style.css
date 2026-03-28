@@ -122,14 +122,17 @@ tbody tr:hover { background: var(--bg-light); }
 .ip-distribution h2 { font-size: 36px; text-align: center; margin-bottom: 48px; }
 
 .footer { background: #1f2937; color: #d1d5db; padding: 60px 20px 20px; }
-.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; margin-bottom: 32px; }
-.footer-section h3, .footer-section h4 { color: white; margin-bottom: 16px; }
-.footer-section p { font-size: 14px; line-height: 1.8; }
-.footer-section ul { list-style: none; }
+.footer .container { max-width: 1200px; margin: 0 auto; padding: 0; }
+.footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 32px; }
+.footer-section { min-width: 0; }
+.footer-section h3 { color: white; margin-bottom: 16px; font-size: 18px; font-weight: 700; }
+.footer-section h4 { color: white; margin-bottom: 16px; font-size: 14px; font-weight: 700; }
+.footer-section p { font-size: 14px; line-height: 1.8; margin: 0; }
+.footer-section ul { list-style: none; padding: 0; margin: 0; }
 .footer-section li { margin-bottom: 12px; }
 .footer-section a { color: #d1d5db; text-decoration: none; font-size: 14px; transition: color 0.3s; }
 .footer-section a:hover { color: white; }
-.footer-bottom { border-top: 1px solid #374151; padding-top: 20px; text-align: center; font-size: 14px; }
+.footer-bottom { border-top: 1px solid #374151; padding-top: 20px; text-align: center; font-size: 12px; color: #9ca3af; }
 
 @media (max-width: 768px) {
     .hero-content h1 { font-size: 32px; }
@@ -140,6 +143,7 @@ tbody tr:hover { background: var(--bg-light); }
     .page-header h1 { font-size: 28px; }
     table { font-size: 12px; }
     th, td { padding: 12px 8px; }
+    .footer-content { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 
 @media (max-width: 480px) {
@@ -151,4 +155,5 @@ tbody tr:hover { background: var(--bg-light); }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .stat-item .stat-value { font-size: 24px; }
     .features-grid, .specs-grid, .pricing-grid, .airports-grid { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr; gap: 24px; }
 }
